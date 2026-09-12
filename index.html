@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motif — Find your next drive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">M</span><span>motif</span></a>
+    <nav class="main-nav"><a class="active" href="#inventory">Inventory</a><a href="#dealers">Dealers</a><a href="#how">How it works</a></nav>
+    <div class="top-actions"><button class="icon-btn" aria-label="Notifications"><i data-lucide="bell"></i><span class="notification-dot"></span></button><button class="profile-btn"><span class="avatar">JS</span><span>Jordan Smith</span><i data-lucide="chevron-down"></i></button></div>
+  </header>
+
+  <main>
+    <section class="hero" id="inventory">
+      <div><p class="eyebrow">USED CARS FROM TRUSTED DEALERS</p><h1>Find your next<br><em>car, simply.</em></h1><p class="hero-copy">Shop quality inspected vehicles from local dealers. Compare prices, view details, and contact a dealer when you are ready.</p></div>
+      <div class="hero-stat"><span class="stat-number">12,480</span><span class="stat-label">cars available<br>near you</span></div>
+    </section>
+
+    <section class="search-panel" id="how">
+      <div class="search-input"><i data-lucide="search"></i><input id="search" placeholder="Search make, model, or keyword" /></div>
+      <div class="search-divider"></div>
+      <label class="select-wrap"><span>Location</span><select id="location"><option>San Francisco, CA</option><option>Oakland, CA</option><option>San Jose, CA</option></select></label>
+      <label class="select-wrap"><span>Price range</span><select id="price"><option value="all">Any price</option><option value="under30">Under $30k</option><option value="30to50">$30k – $50k</option><option value="over50">Over $50k</option></select></label>
+      <button class="search-btn" id="searchBtn"><i data-lucide="arrow-right"></i><span>Search</span></button>
+    </section>
+
+    <section class="content-grid">
+      <aside class="filters">
+        <div class="filter-heading"><span>Refine results</span><button id="clearFilters">Clear all</button></div>
+        <div class="filter-group"><div class="filter-label">Body type</div><div class="check-grid"><label><input type="checkbox" value="SUV" class="body-filter"> SUV <span>482</span></label><label><input type="checkbox" value="Sedan" class="body-filter"> Sedan <span>319</span></label><label><input type="checkbox" value="Truck" class="body-filter"> Truck <span>176</span></label><label><input type="checkbox" value="Coupe" class="body-filter"> Coupe <span>94</span></label></div></div>
+        <div class="filter-group"><div class="filter-label">Make</div><label class="select-filter"><select id="make"><option value="all">All makes</option><option>Toyota</option><option>BMW</option><option>Rivian</option><option>Volvo</option><option>Porsche</option></select><i data-lucide="chevron-down"></i></label></div>
+        <div class="filter-group"><div class="filter-label">Features</div><div class="feature-list"><label><input type="checkbox" class="feature-filter" value="AWD"> All-wheel drive</label><label><input type="checkbox" class="feature-filter" value="Electric"> Electric</label><label><input type="checkbox" class="feature-filter" value="Certified"> Certified</label></div></div>
+        <div class="filter-group"><div class="filter-label">Year</div><div class="range-row"><select id="yearMin"><option value="all">From</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select><span>—</span><select id="yearMax"><option value="all">To</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option></select></div></div>
+        <div class="trust-note"><i data-lucide="shield-check"></i><div><strong>Motif inspected</strong><p>Every listing passes our 150-point inspection.</p></div></div>
+      </aside>
+      <section class="inventory-area"><div class="inventory-head"><div><p class="eyebrow">AVAILABLE NOW</p><h2>Cars near San Francisco</h2></div><label class="sort-select"><span>Sort by</span><select id="sort"><option value="recommended">Recommended</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="year-new">Newest first</option></select><i data-lucide="chevron-down"></i></label></div><div class="dealer-tabs"><button class="dealer-tab active" data-dealer="all">All dealers <span>12,480</span></button><button class="dealer-tab" data-dealer="Apex Motors">Apex Motors <span>248</span></button><button class="dealer-tab" data-dealer="Northline Auto">Northline Auto <span>186</span></button><button class="dealer-tab" data-dealer="Evergreen">Evergreen <span>129</span></button><button class="dealer-tab" data-dealer="Hatchback">Hatchback <span>94</span></button></div><div class="car-grid" id="carGrid"></div><div class="load-more"><button id="loadMore">Load more vehicles <i data-lucide="plus"></i></button></div></section>
+    </section>
+  </main>
+
+  <div class="compare-tray" id="compareTray"><div><span class="compare-count" id="compareCount">0</span><strong> cars selected</strong><span class="compare-hint">Select up to 3 vehicles to compare</span></div><div class="compare-actions"><button class="text-btn" id="clearCompare">Clear</button><button class="compare-btn" id="compareBtn" disabled>Compare <i data-lucide="arrow-up-right"></i></button></div></div>
+  <div class="toast" id="toast"></div>
+  <div class="modal-backdrop" id="modal"><div class="modal"><button class="modal-close" id="modalClose" aria-label="Close"><i data-lucide="x"></i></button><p class="eyebrow">DEALER ENQUIRY</p><h2 id="modalTitle">Contact dealer</h2><p id="modalCopy">Leave your details and the dealer will get back to you.</p><form id="contactForm"><input required placeholder="Your name"><input required type="tel" placeholder="Phone number"><button class="search-btn" type="submit">Send enquiry <i data-lucide="arrow-right"></i></button></form></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
